@@ -21,7 +21,7 @@ import { NgForOf } from '@angular/common';
 export class AppComponent {
   navLinks = [
     {
-      link: '/',
+      link: '',
       label: 'Home',
     },
     {
