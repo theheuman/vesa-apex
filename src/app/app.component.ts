@@ -26,7 +26,7 @@ export class AppComponent {
     },
     {
       link: '/scoreboards',
-      label: 'Scoreboards',
+      label: 'Scores',
     },
     {
       link: '/rosters',
