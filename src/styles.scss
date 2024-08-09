@@ -38,3 +38,7 @@ $vesa-apex-theme: mat.define-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.page {
+  padding: 20px;
+}
