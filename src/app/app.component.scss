@@ -1,0 +1,51 @@
+.mat-mdc-tab-nav-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  ::ng-deep {
+    .mdc-tab-indicator__content--underline {
+      align-self: flex-start;
+    }
+  }
+}
+
+h1 {
+  padding: 0 1rem;
+}
+
+h2 {padding: 1rem;}
+
+mat-sidenav-container {
+  height:100%;
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav {
+
+  width: fit-content;
+  border-right: 1px solid grey;
+  border-radius: 0;
+
+  .entry{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 5px;
+  }
+
+  mat-list-item {
+    background: transparent;
+  }
+
+  .active {
+    border-bottom: 2px solid var(--mdc-tab-indicator-active-indicator-color);
+    border-radius: 0;
+    background: linear-gradient(to bottom, transparent 70%, var(--mdc-tab-indicator-active-indicator-color));
+  }
+
+  .mdc-list-item:before {
+    content: none;
+  }
+
+}
