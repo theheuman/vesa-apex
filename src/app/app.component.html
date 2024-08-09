@@ -1,15 +1,41 @@
-<mat-tab-nav-panel #tabPanel>
-  <router-outlet></router-outlet>
-</mat-tab-nav-panel>
-<nav mat-tab-nav-bar color="primary" [tabPanel]="tabPanel">
-  <a
-    mat-tab-link
-    *ngFor="let link of navLinks"
-    [routerLink]="link.link"
-    routerLinkActive
-    #rla="routerLinkActive"
-    [active]="rla.isActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    >{{ link.label }}</a
-  >
-</nav>
+<ng-container *ngIf="mobileView; else bigView">
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet></router-outlet>
+  </mat-tab-nav-panel>
+  <nav mat-tab-nav-bar color="primary" [tabPanel]="tabPanel">
+    <a
+      mat-tab-link
+      *ngFor="let link of navLinks"
+      [routerLink]="link.link"
+      routerLinkActive
+      #rla="routerLinkActive"
+      [active]="rla.isActive"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ link.label }}
+    </a>
+  </nav>
+</ng-container>
+<ng-template #bigView>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav [opened]="true" mode="side">
+      <mat-nav-list>
+        <a
+          mat-list-item
+          *ngFor="let link of navLinks"
+          [routerLink]="link.link"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [class]="rla.isActive ? 'active' : ''"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="entry">
+            <mat-icon>house</mat-icon>
+            <span>{{ link.label }}</span>
+          </span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+</ng-template>
