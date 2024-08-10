@@ -2,6 +2,8 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+
+@use "m3-theme" as themes;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -9,23 +11,11 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the theme object.
-$vesa-apex-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  density: (
-    scale: 0,
-  )
-));
-
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 :root {
-  @include mat.all-component-themes($vesa-apex-theme);
+  @include mat.all-component-themes(themes.$light-theme);
 }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.
@@ -37,8 +27,60 @@ $vesa-apex-theme: mat.define-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .page {
   padding: 20px;
+  color: #ffffff;
 }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #333; // Default to dark theme background
+  --mat-sidenav-content-text-color: #ffffff;
+  --mat-tab-header-inactive-label-text-color: #ffffff;
+
+  --mat-tab-header-active-label-text-color: #ffd7f3;
+  --mat-tab-header-active-focus-label-text-color: #ffd7f3;
+
+  --mdc-tab-indicator-active-indicator-color: #ffd7f3;
+  --mdc-tab-indicator-active-focus-indicator-color: #ffd7f3;
+  --mat-tab-header-active-indicator-color: #ffd7f3;
+  --mat-tab-header-active-focus-indicator-color: #ffd7f3;
+
+  .active {
+    --mdc-list-list-item-label-text-color: #c89fbd;
+    --mdc-list-list-item-focus-label-text-color: #c89fbd;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include mat.all-component-colors(themes.$light-theme);
+  }
+
+  body {
+    background-color: #f4f4f4; // Light theme background
+    --mat-sidenav-content-text-color: #000000;
+    --mat-tab-header-inactive-label-text-color: #000000;
+
+    --mat-tab-header-active-label-text-color: #76546e;
+    --mat-tab-header-active-focus-label-text-color: #76546e;
+
+    --mdc-tab-indicator-active-indicator-color: #76546e;
+    --mdc-tab-indicator-active-focus-indicator-color: #76546e;
+    --mat-tab-header-active-indicator-color: #76546e;
+    --mat-tab-header-active-focus-indicator-color: #76546e;
+
+    .active {
+      --mdc-list-list-item-label-text-color: #76546e;
+      --mdc-list-list-item-focus-label-text-color: #76546e;
+    }
+  }
+
+  .page {
+    padding: 20px;
+    color: #000000;
+  }
+}
+

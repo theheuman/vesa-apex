@@ -1,3 +1,6 @@
+@use '@angular/material' as mat;
+@use "../m3-theme" as themes;
+
 .mat-mdc-tab-nav-bar {
   position: absolute;
   bottom: 0;
@@ -39,9 +42,8 @@ mat-sidenav {
   }
 
   .active {
-    border-bottom: 2px solid var(--mdc-tab-indicator-active-indicator-color);
+    border-bottom: 2px solid mat.get-theme-color(themes.$dark-theme, tertiary, 70);
     border-radius: 0;
-    background: linear-gradient(to bottom, transparent 70%, var(--mdc-tab-indicator-active-indicator-color));
   }
 
   .mdc-list-item:before {
