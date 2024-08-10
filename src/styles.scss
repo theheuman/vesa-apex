@@ -54,7 +54,7 @@ body {
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     @include mat.all-component-colors(themes.$light-theme);
   }
