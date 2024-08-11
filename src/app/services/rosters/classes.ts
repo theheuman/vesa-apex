@@ -2,6 +2,7 @@ export interface Player {
   id: string;
   name: string;
   overstat: string;
+  discord: string;
   otherNames?: string[];
 }
 
@@ -63,8 +64,43 @@ export class PlayerList<Min extends number, Max extends number> {
 
   addPlayer(player: Player) {
     if (this.players.length >= this.maxLength) {
-      throw Error('Roster at max size, remove a player first');
+      throw Error(
+        'Roster at max size, remove a player first or replacePlayer()',
+      );
+    }
+    this.pushPlayer(player);
+  }
+
+  removePlayer(player: Player) {
+    if (this.players.length <= this.minLength) {
+      throw Error('Roster at min size, add a player first or replacePlayer()');
+    }
+    this.deletePlayer(player);
+  }
+
+  private pushPlayer(player: Player) {
+    if (this.findIndex(player) >= 0) {
+      throw Error('Player already on roster');
     }
     this.players.push(player);
+  }
+  private deletePlayer(player: Player) {
+    const index = this.findIndex(player);
+    if (index > -1) {
+      this.players.splice(index, 1);
+    } else {
+      throw Error('Player not on roster');
+    }
+  }
+
+  private findIndex(player: Player) {
+    return this.players.findIndex(
+      (currentPlayer) => currentPlayer.id === player.id,
+    );
+  }
+
+  replacePlayer(newPlayer: Player, playerToReplace: Player) {
+    this.deletePlayer(playerToReplace);
+    this.pushPlayer(newPlayer);
   }
 }
