@@ -6,8 +6,8 @@ export interface Player {
   otherNames?: string[];
 }
 
-export class Team {
-  readonly players: Player[];
+export class Team<T extends number, N extends number> {
+  private roster: PlayerList<T, N>;
   name: string;
   formerNames: string[];
   formerPlayers: Player[];
@@ -16,34 +16,38 @@ export class Team {
     name: string,
     formerNames: string[],
     formerPlayers: Player[],
+    minPlayers: T,
+    maxPlayers: N,
     players: Player[],
   ) {
     this.name = name;
     this.formerNames = formerNames;
     this.formerPlayers = formerPlayers;
-    this.players = players;
+    this.roster = new PlayerList<T, N>(minPlayers, maxPlayers, players);
+  }
+
+  getPlayers() {
+    return this.roster.getPlayers();
+  }
+
+  addPlayer(player: Player) {
+    this.roster.addPlayer(player);
+  }
+
+  removePlayer(player: Player) {
+    this.roster.removePlayer(player);
+  }
+
+  replacePlayer(newPlayer: Player, playerToReplace: Player) {
+    this.roster.replacePlayer(newPlayer, playerToReplace);
   }
 }
 
-export class LeagueTeam extends Team {
-  private roster: PlayerList<3, 3>;
-
-  constructor(
-    name: string,
-    formerNames: string[],
-    formerPlayers: Player[],
-    players: Player[],
-  ) {
-    super(name, formerNames, formerPlayers, players);
-    this.roster = new PlayerList(3, 3, players);
-  }
-}
-
-// defines an array with a min and max length and specific array operations
-export class PlayerList<Min extends number, Max extends number> {
+class PlayerList<Min extends number, Max extends number> {
   maxLength: number;
   minLength: number;
-  players: Player[];
+  private readonly players: Player[];
+
   constructor(minSize: Min, maxSize: Max, players?: Player[]) {
     this.maxLength = maxSize;
     this.minLength = minSize;
@@ -62,6 +66,10 @@ export class PlayerList<Min extends number, Max extends number> {
     }
   }
 
+  getPlayers() {
+    return this.players;
+  }
+
   addPlayer(player: Player) {
     if (this.players.length >= this.maxLength) {
       throw Error(
@@ -76,6 +84,15 @@ export class PlayerList<Min extends number, Max extends number> {
       throw Error('Roster at min size, add a player first or replacePlayer()');
     }
     this.deletePlayer(player);
+  }
+
+  replacePlayer(newPlayer: Player, playerToReplace: Player) {
+    // this looks like duplicate logic, but its important to check if the player can be added BEFORE we delete a player;
+    if (this.findIndex(newPlayer) >= 0) {
+      throw Error('New player already on team');
+    }
+    this.deletePlayer(playerToReplace);
+    this.pushPlayer(newPlayer);
   }
 
   private pushPlayer(player: Player) {
@@ -97,10 +114,5 @@ export class PlayerList<Min extends number, Max extends number> {
     return this.players.findIndex(
       (currentPlayer) => currentPlayer.id === player.id,
     );
-  }
-
-  replacePlayer(newPlayer: Player, playerToReplace: Player) {
-    this.deletePlayer(playerToReplace);
-    this.pushPlayer(newPlayer);
   }
 }

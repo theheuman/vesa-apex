@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { RostersService } from './rosters.service';
-import { Player, PlayerList } from './classes';
+import { Player, Team } from './classes';
 
 describe('RostersService', () => {
   let service: RostersService;
@@ -15,7 +15,7 @@ describe('RostersService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('player list', () => {
+  describe('roster changes', () => {
     const testPlayer: Player = {
       id: '1',
       name: 'TheHeuman',
@@ -47,7 +47,7 @@ describe('RostersService', () => {
 
     describe('throw error', () => {
       it('Should define a player list', () => {
-        const testList = new PlayerList(3, 5, [
+        const testList = new Team<3, 5>('Dude Cube', [], [], 3, 5, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -57,7 +57,10 @@ describe('RostersService', () => {
 
       it('Should throw an error when player list is too small', () => {
         const constructList = () => {
-          const testList = new PlayerList(3, 5, [testPlayer, testPlayerTwo]);
+          const testList = new Team<3, 5>('Dude Cube', [], [], 3, 5, [
+            testPlayer,
+            testPlayerTwo,
+          ]);
           console.log(testList);
         };
         expect(constructList).toThrow();
@@ -65,7 +68,7 @@ describe('RostersService', () => {
 
       it('Should throw an error when player list is too large', () => {
         const constructList = () => {
-          const testList = new PlayerList(3, 3, [
+          const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
             testPlayer,
             testPlayerTwo,
             testPlayerThree,
@@ -77,7 +80,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when adding a player to a full roster', () => {
-        const testList = new PlayerList(3, 3, [
+        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -89,7 +92,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when adding a player thats already on the roster', () => {
-        const testList = new PlayerList(3, 3, [
+        const testList = new Team<3, 4>('Dude Cube', [], [], 3, 4, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -101,7 +104,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when removing a player from a min size roster', () => {
-        const testList = new PlayerList(3, 3, [
+        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -113,7 +116,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when removing a player from a roster that they are not on', () => {
-        const testList = new PlayerList(3, 3, [
+        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -123,16 +126,33 @@ describe('RostersService', () => {
         };
         expect(removePlayer).toThrow();
       });
+
+      it('Should throw an error when replacing old player with a player already on team', () => {
+        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+          testPlayer,
+          testPlayerTwo,
+          testPlayerThree,
+        ]);
+        const removePlayer = () => {
+          testList.replacePlayer(testPlayerThree, testPlayerTwo);
+        };
+        expect(removePlayer).toThrow();
+        expect(testList.getPlayers()).toEqual([
+          testPlayer,
+          testPlayerTwo,
+          testPlayerThree,
+        ]);
+      });
     });
 
     it('Should add player to roster', () => {
-      const testList = new PlayerList(3, 4, [
+      const testList = new Team<3, 4>('Dude Cube', [], [], 3, 4, [
         testPlayer,
         testPlayerTwo,
         testPlayerThree,
       ]);
       testList.addPlayer(testPlayerFour);
-      expect(testList.players).toEqual([
+      expect(testList.getPlayers()).toEqual([
         testPlayer,
         testPlayerTwo,
         testPlayerThree,
@@ -141,14 +161,28 @@ describe('RostersService', () => {
     });
 
     it('Should remove a player from roster', () => {
-      const testList = new PlayerList(3, 4, [
+      const testList = new Team<3, 4>('Dude Cube', [], [], 3, 4, [
         testPlayer,
         testPlayerTwo,
         testPlayerThree,
         testPlayerFour,
       ]);
       testList.removePlayer(testPlayerFour);
-      expect(testList.players).toEqual([
+      expect(testList.getPlayers()).toEqual([
+        testPlayer,
+        testPlayerTwo,
+        testPlayerThree,
+      ]);
+    });
+
+    it('Should replace a player from roster', () => {
+      const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+        testPlayer,
+        testPlayerTwo,
+        testPlayerFour,
+      ]);
+      testList.replacePlayer(testPlayerThree, testPlayerFour);
+      expect(testList.getPlayers()).toEqual([
         testPlayer,
         testPlayerTwo,
         testPlayerThree,
