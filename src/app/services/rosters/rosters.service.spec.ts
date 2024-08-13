@@ -189,4 +189,72 @@ describe('RostersService', () => {
       ]);
     });
   });
+
+  describe('get from DB', () => {
+    it('Should get all players from DB', async () => {
+      const players = await service.getPlayers();
+      expect(players.length).toEqual(10);
+    });
+
+    it('Should get all league teams from DB', async () => {
+      const teams: Team<3, 3>[] = await service.getTeams(3, 3);
+      const teamName = 'Dude Cube';
+      const currentPlayers: Player[] = [
+        {
+          id: '1',
+          name: 'TheHeuman',
+          otherNames: ['DC TheHeuman'],
+          overstat: 'a valid url',
+          discord: 'theheuman',
+        },
+        {
+          id: '4',
+          name: 'Aqua',
+          otherNames: ['DC Aqua', 'Crazy On Emotion'],
+          overstat: 'a valid url',
+          discord: 'thereforeisam',
+        },
+        {
+          id: '5',
+          name: 'LastCall',
+          otherNames: [],
+          overstat: 'a valid url',
+          discord: 'lastcall',
+        },
+      ];
+      const formerNames: string[] = [];
+      const formerPlayers: Player[] = [
+        {
+          id: '6',
+          name: 'Proxy',
+          otherNames: ['DC Proxy', 'VIVA Proxy'],
+          overstat: 'a valid url',
+          discord: 'proxy1',
+        },
+        {
+          id: '7',
+          name: '///baeV',
+          otherNames: ['S3 Mikey', 'DC Mikey'],
+          overstat: 'a valid url',
+          discord: 's3mikey',
+        },
+        {
+          id: '8',
+          name: 'cTreazy',
+          otherNames: [
+            'I Love Cole Palmer',
+            'Something Else I cant remember that was wild',
+          ],
+          overstat: 'a valid url',
+          discord: 'ctreazy',
+        },
+      ];
+      expect(teams.length).toEqual(1);
+      const receivedTeam = teams[0];
+      expect(receivedTeam.name).toEqual(teamName);
+      expect(receivedTeam.getPlayers()).toEqual(currentPlayers);
+      expect(receivedTeam.formerNames).toEqual(formerNames);
+      expect(receivedTeam.formerPlayers).toEqual(formerPlayers);
+    });
+  });
 });

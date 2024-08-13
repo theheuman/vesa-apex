@@ -5,6 +5,16 @@ export interface Player {
   discord: string;
   otherNames?: string[];
 }
+export const LeagueTypes = {
+  vesa: {
+    max: 3,
+    min: 3,
+  },
+  vcs: {
+    max: 5,
+    min: 3,
+  },
+};
 
 export class Team<T extends number, N extends number> {
   private roster: PlayerList<T, N>;
