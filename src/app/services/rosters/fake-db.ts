@@ -74,6 +74,27 @@ export const players = [
     overstat: 'a valid url',
     discord: 'kidxgoon',
   },
+  {
+    id: '11',
+    name: 'FreeMelee',
+    otherNames: [],
+    overstat: 'a valid url',
+    discord: 'FreeMelee',
+  },
+  {
+    id: '12',
+    name: 'Fizzy',
+    otherNames: [],
+    overstat: 'a valid url',
+    discord: 'fizzy',
+  },
+  {
+    id: '13',
+    name: 'Blue',
+    otherNames: ['Orange', 'Persimmon'],
+    overstat: 'a valid url',
+    discord: 'blue',
+  },
 ];
 
 export const teams: DBTeam[] = [
@@ -109,6 +130,26 @@ export const teams: DBTeam[] = [
         name: 'cTreazy',
       },
     ],
+  },
+  {
+    name: 'Scrub Squad',
+    leagueType: 'vesa',
+    roster: [
+      {
+        id: '11',
+        name: 'FreeMelee',
+      },
+      {
+        id: '12',
+        name: 'Fizzy',
+      },
+      {
+        id: '13',
+        name: 'Blue',
+      },
+    ],
+    formerNames: [],
+    formerPlayers: [],
   },
   {
     name: 'VIVA',

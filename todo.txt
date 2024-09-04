@@ -1,0 +1,4 @@
+* Navigable to team and player pages (figure out how :id works)
+* more details button click on player (opens modal?)
+* more details button click on team (individual ones for each property?) (opens modal?)
+* their own branches?
