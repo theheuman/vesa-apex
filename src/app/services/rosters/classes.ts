@@ -16,8 +16,15 @@ export const LeagueTypes = {
   },
 };
 
-export class Team<T extends number, N extends number> {
-  private roster: PlayerList<T, N>;
+export abstract class TeamWrapper {
+  abstract roster: PlayerListWrapper;
+  abstract name: string;
+  abstract formerNames: string[];
+  abstract formerPlayers: Player[];
+}
+
+export class Team<T extends number, N extends number> extends TeamWrapper {
+  roster: PlayerList<T, N>;
   name: string;
   formerNames: string[];
   formerPlayers: Player[];
@@ -30,6 +37,7 @@ export class Team<T extends number, N extends number> {
     maxPlayers: N,
     players: Player[],
   ) {
+    super();
     this.name = name;
     this.formerNames = formerNames;
     this.formerPlayers = formerPlayers;
@@ -53,12 +61,27 @@ export class Team<T extends number, N extends number> {
   }
 }
 
-class PlayerList<Min extends number, Max extends number> {
+export abstract class PlayerListWrapper {
+  abstract maxLength: number;
+  abstract minLength: number;
+  abstract players: Player[];
+
+  abstract getPlayers(): Player[];
+  abstract addPlayer(player: Player): void;
+  abstract removePlayer(player: Player): void;
+  abstract replacePlayer(newPlayer: Player, playerToReplace: Player): void;
+}
+
+class PlayerList<
+  Min extends number,
+  Max extends number,
+> extends PlayerListWrapper {
   maxLength: number;
   minLength: number;
-  private readonly players: Player[];
+  players: Player[];
 
   constructor(minSize: Min, maxSize: Max, players?: Player[]) {
+    super();
     this.maxLength = maxSize;
     this.minLength = minSize;
 

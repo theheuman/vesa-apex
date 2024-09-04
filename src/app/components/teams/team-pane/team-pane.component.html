@@ -1,0 +1,7 @@
+<div *ngIf="team !== undefined">
+  <h3>{{ team?.name }}</h3>
+  <app-player-pane *ngFor="let player of currentPlayers" [player]="player" />
+</div>
+<div *ngIf="team === undefined">
+  <p>Team is undefined</p>
+</div>

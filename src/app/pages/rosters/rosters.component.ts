@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Team } from '../../services/rosters/classes';
 import { RostersService } from '../../services/rosters/rosters.service';
 import { NgForOf } from '@angular/common';
+import { TeamPaneComponent } from '../../components/teams/team-pane/team-pane.component';
 
 @Component({
   selector: 'app-rosters',
   standalone: true,
-  imports: [NgForOf],
+  imports: [NgForOf, TeamPaneComponent],
   templateUrl: './rosters.component.html',
   styleUrl: './rosters.component.scss',
 })

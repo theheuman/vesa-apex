@@ -2,10 +2,10 @@
   <h1>Rosters</h1>
   <div class="league-teams">
     <h2>League teams</h2>
-    <p *ngFor="let team of leagueTeams">{{ team.name }}</p>
+    <app-team-pane *ngFor="let team of leagueTeams" [team]="team" />
   </div>
   <div class="league-teams">
     <h2>VCS Teams</h2>
-    <p *ngFor="let team of vcsTeams">{{ team.name }}</p>
+    <app-team-pane *ngFor="let team of leagueTeams" [team]="team" />
   </div>
 </div>
