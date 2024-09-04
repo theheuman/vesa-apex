@@ -1,6 +1,6 @@
-import { DBTeam } from './dbInterfaces';
+import { DBPlayer, DBTeam } from './dbInterfaces';
 
-export const players = [
+export const players: DBPlayer[] = [
   {
     id: '1',
     name: 'TheHeuman',
@@ -99,6 +99,7 @@ export const players = [
 
 export const teams: DBTeam[] = [
   {
+    id: '1',
     name: 'Dude Cube',
     leagueType: 'vesa',
     roster: [
@@ -132,6 +133,7 @@ export const teams: DBTeam[] = [
     ],
   },
   {
+    id: '3',
     name: 'Scrub Squad',
     leagueType: 'vesa',
     roster: [
@@ -153,6 +155,7 @@ export const teams: DBTeam[] = [
   },
   {
     name: 'VIVA',
+    id: '2',
     leagueType: 'vcs',
     roster: [
       {

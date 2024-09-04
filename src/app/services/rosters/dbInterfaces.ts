@@ -6,6 +6,7 @@ export interface DBPlayer {
   otherNames?: string[];
 }
 export interface DBTeam {
+  id: string;
   name: string;
   roster: { id: string; name: string }[];
   formerNames: string[];
