@@ -1,1 +1,11 @@
-<div class="page">rosters works!</div>
+<div class="page">
+  <h1>Rosters</h1>
+  <div class="league-teams">
+    <h2>League teams</h2>
+    <p *ngFor="let team of leagueTeams">{{ team.name }}</p>
+  </div>
+  <div class="league-teams">
+    <h2>VCS Teams</h2>
+    <p *ngFor="let team of vcsTeams">{{ team.name }}</p>
+  </div>
+</div>
