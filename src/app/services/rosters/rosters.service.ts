@@ -96,6 +96,7 @@ export class RostersService {
       }),
     );
     return new Team<T, N>(
+      team.id,
       team.name,
       team.formerNames,
       formerPlayers,

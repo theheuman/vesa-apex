@@ -47,7 +47,7 @@ describe('RostersService', () => {
 
     describe('throw error', () => {
       it('Should define a player list', () => {
-        const testList = new Team<3, 5>('Dude Cube', [], [], 3, 5, [
+        const testList = new Team<3, 5>('1', 'Dude Cube', [], [], 3, 5, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -57,7 +57,7 @@ describe('RostersService', () => {
 
       it('Should throw an error when player list is too small', () => {
         const constructList = () => {
-          const testList = new Team<3, 5>('Dude Cube', [], [], 3, 5, [
+          const testList = new Team<3, 5>('1', 'Dude Cube', [], [], 3, 5, [
             testPlayer,
             testPlayerTwo,
           ]);
@@ -68,7 +68,7 @@ describe('RostersService', () => {
 
       it('Should throw an error when player list is too large', () => {
         const constructList = () => {
-          const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+          const testList = new Team<3, 3>('1', 'Dude Cube', [], [], 3, 3, [
             testPlayer,
             testPlayerTwo,
             testPlayerThree,
@@ -80,7 +80,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when adding a player to a full roster', () => {
-        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+        const testList = new Team<3, 3>('1', 'Dude Cube', [], [], 3, 3, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -92,7 +92,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when adding a player thats already on the roster', () => {
-        const testList = new Team<3, 4>('Dude Cube', [], [], 3, 4, [
+        const testList = new Team<3, 4>('1', 'Dude Cube', [], [], 3, 4, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -104,7 +104,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when removing a player from a min size roster', () => {
-        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+        const testList = new Team<3, 3>('1', 'Dude Cube', [], [], 3, 3, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -116,7 +116,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when removing a player from a roster that they are not on', () => {
-        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+        const testList = new Team<3, 3>('1', 'Dude Cube', [], [], 3, 3, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -128,7 +128,7 @@ describe('RostersService', () => {
       });
 
       it('Should throw an error when replacing old player with a player already on team', () => {
-        const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+        const testList = new Team<3, 3>('1', 'Dude Cube', [], [], 3, 3, [
           testPlayer,
           testPlayerTwo,
           testPlayerThree,
@@ -146,7 +146,7 @@ describe('RostersService', () => {
     });
 
     it('Should add player to roster', () => {
-      const testList = new Team<3, 4>('Dude Cube', [], [], 3, 4, [
+      const testList = new Team<3, 4>('1', 'Dude Cube', [], [], 3, 4, [
         testPlayer,
         testPlayerTwo,
         testPlayerThree,
@@ -161,7 +161,7 @@ describe('RostersService', () => {
     });
 
     it('Should remove a player from roster', () => {
-      const testList = new Team<3, 4>('Dude Cube', [], [], 3, 4, [
+      const testList = new Team<3, 4>('1', 'Dude Cube', [], [], 3, 4, [
         testPlayer,
         testPlayerTwo,
         testPlayerThree,
@@ -176,7 +176,7 @@ describe('RostersService', () => {
     });
 
     it('Should replace a player from roster', () => {
-      const testList = new Team<3, 3>('Dude Cube', [], [], 3, 3, [
+      const testList = new Team<3, 3>('1', 'Dude Cube', [], [], 3, 3, [
         testPlayer,
         testPlayerTwo,
         testPlayerFour,

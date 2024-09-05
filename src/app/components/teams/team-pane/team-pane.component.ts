@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Player, TeamWrapper } from '../../../services/rosters/classes';
 import { NgForOf, NgIf } from '@angular/common';
 import { PlayerPaneComponent } from '../../players/player-pane/player-pane.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-pane',
@@ -15,10 +16,15 @@ export class TeamPaneComponent implements OnChanges {
   currentPlayers: Player[] = [];
   formerPlayers: Player[] = [];
 
+  constructor(private router: Router) {}
   ngOnChanges() {
     if (this.team) {
       this.currentPlayers = this.team.roster.getPlayers();
       this.formerPlayers = this.team.formerPlayers;
     }
+  }
+
+  openDetails() {
+    this.router.navigateByUrl('/team/' + this.team?.id);
   }
 }

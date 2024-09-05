@@ -17,6 +17,7 @@ export const LeagueTypes = {
 };
 
 export abstract class TeamWrapper {
+  abstract id: string;
   abstract roster: PlayerListWrapper;
   abstract name: string;
   abstract formerNames: string[];
@@ -24,12 +25,14 @@ export abstract class TeamWrapper {
 }
 
 export class Team<T extends number, N extends number> extends TeamWrapper {
+  id: string;
   roster: PlayerList<T, N>;
   name: string;
   formerNames: string[];
   formerPlayers: Player[];
 
   constructor(
+    id: string,
     name: string,
     formerNames: string[],
     formerPlayers: Player[],
@@ -38,6 +41,7 @@ export class Team<T extends number, N extends number> extends TeamWrapper {
     players: Player[],
   ) {
     super();
+    this.id = id;
     this.name = name;
     this.formerNames = formerNames;
     this.formerPlayers = formerPlayers;
