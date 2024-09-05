@@ -33,6 +33,16 @@ html, body { height: 100%; }
   color: #ffffff;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  min-height: 48px;
+  min-width: 48px;
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;

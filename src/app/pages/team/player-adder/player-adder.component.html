@@ -1,0 +1,19 @@
+<p>player-adder works!</p>
+<div>
+  Available players:
+  <p *ngFor="let player of availablePlayers">
+    {{ player.name }} (<span *ngFor="let name of player.otherNames"
+      >{{ name }},
+    </span>
+    )
+  </p>
+</div>
+<div>
+  Already registered players:
+  <p *ngFor="let player of currentPlayers">
+    {{ player.name }} (<span *ngFor="let name of player.otherNames"
+      >{{ name }},
+    </span>
+    )
+  </p>
+</div>

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Edit Team</h1>
+<div mat-dialog-content>
+  <div class="input">
+    <mat-form-field>
+      <label [htmlFor]="'team-name'">Team name</label>
+      <input matInput id="team-name" [(ngModel)]="name" />
+    </mat-form-field>
+  </div>
+  <div class="input">
+    <mat-form-field>
+      <label [htmlFor]="'league-type'">League Type</label>
+      <input matInput id="league-type" [(ngModel)]="leagueType" />
+    </mat-form-field>
+  </div>
+  <div class="input">
+    <mat-form-field>
+      <label [htmlFor]="'former-names'">Former Names</label>
+      <input matInput id="former-names" [(ngModel)]="formerNames" />
+    </mat-form-field>
+  </div>
+  <div class="input">
+    <p>Roster</p>
+    <app-player-adder [currentPlayers]="players" />
+  </div>
+  <div class="input">
+    <p>Previous players</p>
+    <app-player-adder [currentPlayers]="allPlayers" />
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="submitChanges()" cdkFocusInitial>Submit</button>
+</div>

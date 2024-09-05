@@ -1,9 +1,12 @@
 <div class="page">
   <div *ngIf="!team">No team with {{ id }} found.</div>
   <div *ngIf="team">
-    <h1>
-      {{ team.name }}
-    </h1>
+    <div class="row">
+      <h1>
+        {{ team.name }}
+      </h1>
+      <button (click)="openEditDialog()">Edit</button>
+    </div>
     <h2>Current players</h2>
     <app-player-pane
       *ngFor="let player of team.roster.players"
