@@ -8,9 +8,9 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { Team, TeamWrapper, Player } from '../../../services/rosters/classes';
-import { MatFormField } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import {
   getLeagueType,
@@ -24,13 +24,13 @@ import { PlayerAdderComponent } from '../player-adder/player-adder.component';
   imports: [
     MatDialogTitle,
     MatDialogContent,
-    MatFormField,
     FormsModule,
-    MatInput,
     MatDialogActions,
     MatDialogClose,
     MatButton,
     PlayerAdderComponent,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './team-edit-dialog.component.html',
   styleUrl: './team-edit-dialog.component.scss',
