@@ -1,1 +1,23 @@
-<p>team works! id: {{ id }}</p>
+<div class="page">
+  <div *ngIf="!team">No team with {{ id }} found.</div>
+  <div *ngIf="team">
+    <h1>
+      {{ team.name }}
+    </h1>
+    <h2>Current players</h2>
+    <app-player-pane
+      *ngFor="let player of team.roster.players"
+      [player]="player"
+    />
+    <h2>Former players</h2>
+    <app-player-pane
+      *ngFor="let player of team.formerPlayers"
+      [player]="player"
+    />
+    <h2>Former team names</h2>
+    <p *ngIf="team.formerNames.length === 0">No former names found</p>
+    <p *ngFor="let name of team.formerNames">
+      {{ name }}
+    </p>
+  </div>
+</div>

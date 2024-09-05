@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LeagueTypes, Player, Team } from './classes';
+import { LeagueTypes, Player, Team, TeamWrapper } from './classes';
 import { players, teams } from './fake-db';
 import { DBTeam } from './dbInterfaces';
 
@@ -64,7 +64,14 @@ export class RostersService {
     return Promise.resolve(mappedTeams);
   }
 
+  async getTeamByID(id: string): Promise<TeamWrapper> {
+    const filteredTeams = teams.filter((team) => team.id === id);
+    const team = await this.mapTeamFromDB(filteredTeams[0]);
+    return team;
+  }
+
   // TODO need a typesound way of knowing leagueType min and max are equivalent to T and N
+  // TODO instead of looping through current roster and former players and looping through all players in every iteration take all player id's from the two arrays and search for those players in O(n) on the players array
   async mapTeamFromDB<T extends number, N extends number>(
     team: DBTeam,
   ): Promise<Team<T, N>> {
