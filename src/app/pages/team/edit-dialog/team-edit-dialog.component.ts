@@ -7,7 +7,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { Team, TeamWrapper, Player } from '../../../services/rosters/classes';
+import { TeamWrapper, Player } from '../../../services/rosters/classes';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -63,17 +63,11 @@ export class TeamEditDialogComponent {
   }
 
   submitChanges(): void {
-    const fakePlayer = {
-      id: '1',
-      name: 'fake player',
-      overstat: 'fake over',
-      discord: 'fake',
-    };
-    const team = new Team<3, 3>('Different name', [], [], 3, 3, [
-      fakePlayer,
-      fakePlayer,
-      fakePlayer,
-    ]);
-    this.dialogRef.close({ team });
+    this.data.team.name = this.name;
+    this.data.team.formerPlayers = this.formerPlayers;
+    this.data.team.formerNames = this.formerNames;
+    // TODO how to handle player changing
+    // TODO how to handle league type changing
+    this.dialogRef.close({ team: this.data.team });
   }
 }
